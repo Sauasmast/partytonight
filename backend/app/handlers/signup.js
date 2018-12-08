@@ -2,11 +2,14 @@ const signup = require(__base + "/app/modules/signup");
 const { validateSignup } = require(__base + "/app/validation/signupValidator");
 
 module.exports.signingup = async (req, res) => {
+  data = req.body;
   try {
-    data = req.body;
-    let initlocal = await signup.init(data);
     let validation = await validateSignup(data);
+    let result = await signup.duplicate_check(data);
+    let hashing = await signup.hash_password(data.password);
+    let insert_user = await signup.insert_user(data, hashing);
+    console.log(hashing);
   } catch (e) {
-    res.send({ error: { code: e.code, message: e.message } });
+    res.send(e);
   }
 };
