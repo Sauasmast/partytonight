@@ -5,7 +5,8 @@ module.exports.logging_in = async (req, res) => {
   try {
     // authenticate not using passport
     let authenticate = await login.authenticate(data);
-    res.send({ code: 200, message: "User is authenticated" });
+    let jwttoken = await login.createjwttoken(authenticate);
+    res.send({ code: 200, token: jwttoken });
   } catch (e) {
     res.send(e);
   }
