@@ -13,6 +13,6 @@ module.exports.signingup = async (req, res) => {
       message: "User sucessfully added"
     });
   } catch (e) {
-    res.send(e);
+    res.status(400).send(e);
   }
 };
