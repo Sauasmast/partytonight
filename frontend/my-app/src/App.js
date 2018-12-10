@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <body id="page-top">
+        <div id="page-top">
           <Navbar> </Navbar>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -19,7 +19,7 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route component={Notfound} />
           </Switch>
-        </body>
+        </div>
       </BrowserRouter>
     );
   }

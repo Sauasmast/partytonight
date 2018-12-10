@@ -1,53 +1,92 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class extends Component {
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      errors: {}
+    };
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    axios
+      .post("/auth/signup", this.state)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch(err => console.log(err.response.data));
+  };
+
   render() {
     return (
-      <header class="masthead">
-        <div class="container d-flex h-100 align-items-center">
-          <div class="mx-auto text-center">
-            <form>
-              <div class="form-group">
-                <label for="username" className="text-white">
+      <header className="masthead">
+        <div className="container d-flex h-100 align-items-center">
+          <div className="mx-auto text-center">
+            <form onSubmit={this.onSubmit}>
+              <div className="form-group">
+                <label htmlFor="username" className="text-white">
                   UserName:
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="username"
+                  name="username"
+                  value={this.state.name}
+                  onChange={this.onChange}
                   placeholder="Username"
                 />
               </div>
-              <div class="form-group">
-                <label for="email" className="text-white">
+              <div className="form-group">
+                <label htmlFor="email" className="text-white">
                   Email:
                 </label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="email"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
                   placeholder="Email Address"
                 />
               </div>
-              <div class="form-group">
-                <label for="password" className="text-white">
+              <div className="form-group">
+                <label htmlFor="password" className="text-white">
                   Password
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  name="password"
+                  className="form-control"
                   id="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
                   placeholder="Password"
                 />
               </div>
-              <div class="form-group">
-                <label for="confirmPassword" className="text-white">
+              <div className="form-group">
+                <label htmlFor="confirmPassword" className="text-white">
                   Confirm Password
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  name="confirmPassword"
+                  className="form-control"
                   id="confirmPassword"
+                  value={this.state.confirmPassword}
+                  onChange={this.onChange}
                   placeholder="Password"
                 />
               </div>
