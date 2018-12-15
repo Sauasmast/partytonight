@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
 import classnames from "classnames";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/authActions";
+import { withRouter } from "react-router-dom";
 
-export default class extends Component {
+class Signup extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,21 +16,27 @@ export default class extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.error) {
+      this.setState({
+        errors: nextProps.error
+      });
+    }
+  }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("Here");
-    axios
-      .post("/auth/signup", this.state)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-      .catch(err => this.setState({ errors: err.response.data }));
-    console.log(this.states);
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password,
+      email: this.state.email,
+      confirmPassword: this.state.confirmPassword
+    };
+    this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
@@ -124,3 +132,13 @@ export default class extends Component {
     );
   }
 }
+
+const mapStatetoProps = state => ({
+  auth: state.auth,
+  error: state.error
+});
+
+export default connect(
+  mapStatetoProps,
+  { registerUser }
+)(withRouter(Signup));
