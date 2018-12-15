@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import classnames from "classnames";
 
 export default class extends Component {
   constructor() {
@@ -19,13 +20,15 @@ export default class extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    console.log("Here");
     axios
       .post("/auth/signup", this.state)
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
-      .catch(err => console.log(err.response.data));
+      .catch(err => this.setState({ errors: err.response.data }));
+    console.log(this.states);
   };
 
   render() {
@@ -40,13 +43,20 @@ export default class extends Component {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className={classnames("form-control", {
+                    "is-invalid": this.state.errors.username
+                  })}
                   id="username"
                   name="username"
                   value={this.state.name}
                   onChange={this.onChange}
                   placeholder="Username"
                 />
+                {this.state.errors.username && (
+                  <div className="invalid-feedback">
+                    {this.state.errors.username}
+                  </div>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="text-white">
@@ -54,13 +64,20 @@ export default class extends Component {
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className={classnames("form-control", {
+                    "is-invalid": this.state.errors.email
+                  })}
                   id="email"
                   name="email"
                   value={this.state.email}
                   onChange={this.onChange}
                   placeholder="Email Address"
                 />
+                {this.state.errors.email && (
+                  <div className="invalid-feedback">
+                    {this.state.errors.email}
+                  </div>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="password" className="text-white">
@@ -69,12 +86,19 @@ export default class extends Component {
                 <input
                   type="password"
                   name="password"
-                  className="form-control"
+                  className={classnames("form-control", {
+                    "is-invalid": this.state.errors.password
+                  })}
                   id="password"
                   value={this.state.password}
                   onChange={this.onChange}
                   placeholder="Password"
                 />
+                {this.state.errors.password && (
+                  <div className="invalid-feedback">
+                    {this.state.errors.password}
+                  </div>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="confirmPassword" className="text-white">
