@@ -1,8 +1,58 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutuser } from "../actions/authActions";
+import { withRouter } from "react-router-dom";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
+  logout = e => {
+    e.preventDefault();
+    this.props.logoutuser(this.props.history);
+  };
+
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    const notlogged = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="nav-link js-scroll-trigger text-white" to="/about">
+            About
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link js-scroll-trigger text-white" to="/signup">
+            Sign Up
+          </Link>
+        </li>
+      </ul>
+    );
+
+    const loggedin = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <p className="nav-link js-scroll-trigger text-white">
+            Hey,
+            {user.user_id}{" "}
+          </p>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link js-scroll-trigger text-white" href="#projects">
+            Parties
+          </a>
+        </li>
+        <li className="nav-item">
+          <a
+            className="nav-link js-scroll-trigger text-white"
+            href=""
+            onClick={this.logout}
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    );
+
     return (
       <nav
         className="navbar navbar-expand-lg navbar-light fixed-top"
@@ -25,35 +75,19 @@ export default class Navbar extends Component {
             <i className="fas fa-bars" />
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <a
-                  className="nav-link js-scroll-trigger text-white"
-                  href="#about"
-                >
-                  About
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link js-scroll-trigger text-white"
-                  href="#projects"
-                >
-                  Parties
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link js-scroll-trigger text-white"
-                  to="/signup"
-                >
-                  Sign Up
-                </Link>
-              </li>
-            </ul>
+            {isAuthenticated ? loggedin : notlogged}
           </div>
         </div>
       </nav>
     );
   }
 }
+
+const mapStatetoProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStatetoProps,
+  { logoutuser }
+)(withRouter(Navbar));

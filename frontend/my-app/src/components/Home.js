@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class Home extends Component {
+class Home extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/loggedin");
+    }
+  }
+
   render() {
     return (
       <header class="masthead">
@@ -21,3 +28,11 @@ export default class Home extends Component {
     );
   }
 }
+const mapStatetoProps = state => {
+  return { auth: state.auth };
+};
+
+export default connect(
+  mapStatetoProps,
+  null
+)(Home);

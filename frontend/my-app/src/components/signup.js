@@ -16,6 +16,12 @@ class Signup extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/loggedin");
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       this.setState({
