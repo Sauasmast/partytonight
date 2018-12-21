@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { isEmpty } = require(__base + "/app/modules/common/isEmpty");
 const mysqlConnection = require(__base + "/app/modules/common/mysql");
+const uuidv4 = require("uuid/v4");
 
 module.exports.duplicate_check = userdata => {
   return new Promise(async (resolve, reject) => {
@@ -50,8 +51,8 @@ module.exports.insert_user = (userdata, hashpassword) => {
   return new Promise(async (resolve, reject) => {
     try {
       let result = await mysqlConnection.query(
-        "INSERT INTO users (username, email_address, password) VALUES (?,?,?)",
-        [userdata.username, userdata.email, hashpassword]
+        "INSERT INTO users (user_id,username, email_address, password) VALUES (?,?,?,?)",
+        [uuidv4(), userdata.username, userdata.email, hashpassword]
       );
       if (result.affectedRows !== 1) {
         reject({ error: { code: 500, message: "Internal server error" } });
@@ -59,7 +60,7 @@ module.exports.insert_user = (userdata, hashpassword) => {
       resolve();
     } catch (e) {
       console.log(e);
-      reject({ errors: { code: 500, message: "Internal server error" } });
+      reject({ error: { code: 500, message: "Internal server error" } });
     }
   });
 };

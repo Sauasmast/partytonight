@@ -16,10 +16,10 @@ module.exports.authenticate = userdata => {
             reject(err);
           }
           if (res) {
-            resolve(result[0].user_id);
+            resolve(result[0]);
           } else {
             reject({
-              errors: { code: 400, message: "Password did not match" }
+              errors: { code: 400, password: "Password did not match" }
             });
           }
         });
@@ -27,7 +27,7 @@ module.exports.authenticate = userdata => {
         reject({
           errors: {
             code: 400,
-            message: "User with an email address doesnot exist"
+            username: "User with an email address doesnot exist"
           }
         });
       }
@@ -37,9 +37,13 @@ module.exports.authenticate = userdata => {
   });
 };
 
-module.exports.createjwttoken = id => {
+module.exports.createjwttoken = data => {
   return new Promise(async (resolve, reject) => {
-    payload = { user_id: id };
+    payload = {
+      user_id: data.user_id,
+      username: data.username,
+      email: data.email_address
+    };
     jwt.sign(payload, config.jwt.cert, function(err, token) {
       if (err) {
         reject({ errors: { code: 500, message: "Internal server error" } });

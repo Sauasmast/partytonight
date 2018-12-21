@@ -31,12 +31,12 @@ module.exports.validateSignup = data => {
 
     if (isEmpty(data.password)) {
       errors.code = 400;
-      errors.password = "Password cannot be empty";
+      errors.password = ["Password cannot be empty"];
     }
 
     if (isEmpty(data.confirmPassword)) {
       errors.code = 400;
-      errors.password = "Confirm password cannot be empty";
+      errors.password = ["Confirm password cannot be empty"];
     }
 
     if (!re.test(data.password)) {
@@ -52,7 +52,7 @@ module.exports.validateSignup = data => {
 
     if (data.password !== data.confirmPassword) {
       errors.code = 400;
-      errors.password = "Both password should match today with each other";
+      errors.password = ["Both password should match today with each other"];
     }
 
     // if all of the condition failed it will either resolve or reject

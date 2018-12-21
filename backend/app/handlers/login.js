@@ -8,6 +8,6 @@ module.exports.logging_in = async (req, res) => {
     let jwttoken = await login.createjwttoken(authenticate);
     res.send({ code: 200, token: jwttoken });
   } catch (e) {
-    res.send(e);
+    res.status(400).send({ errors: e });
   }
 };
