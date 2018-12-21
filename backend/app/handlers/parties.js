@@ -43,3 +43,12 @@ module.exports.deleteparty = async (req, res) => {
     res.status(e.code).send({ errors: e });
   }
 };
+
+module.exports.get_info_party = async (req, res) => {
+  try {
+    let party_data = await party.partyexist(req.params.party_id);
+    res.status(200).send(party_data);
+  } catch (e) {
+    res.status(e.code).send({ errors: e });
+  }
+};
