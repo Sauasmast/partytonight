@@ -32,9 +32,16 @@ class Navbar extends Component {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <p className="nav-link js-scroll-trigger text-white">
-            Hey,
-            {user.user_id}{" "}
+            Hey, {user.username}
           </p>
+        </li>
+        <li className="nav-item">
+          <Link
+            className="nav-link js-scroll-trigger text-white"
+            to="/myparties"
+          >
+            Your Parties
+          </Link>
         </li>
         <li className="nav-item">
           <a className="nav-link js-scroll-trigger text-white" href="#projects">
@@ -59,7 +66,10 @@ class Navbar extends Component {
         id="mainNav"
       >
         <div className="container">
-          <Link className="navbar-brand js-scroll-trigger" to="/">
+          <Link
+            className="navbar-brand js-scroll-trigger"
+            to={isAuthenticated ? "/home" : "/"}
+          >
             Party With Us
           </Link>
           <button

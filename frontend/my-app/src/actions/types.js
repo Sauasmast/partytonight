@@ -1,2 +1,5 @@
 export const GET_ERRORS = "GET_ERRORS";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const GET_PARTIES = "GET_PARTIES";
+export const GET_INDIVIDUAL_PARTY = "GET_INDIVIDUAL_PARTY";
+export const USER_PARTY = "GET_USER_PARTY";

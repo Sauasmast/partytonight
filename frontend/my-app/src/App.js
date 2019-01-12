@@ -8,10 +8,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Notfound from "./components/404";
 import Login from "./components/login";
 import Signup from "./components/signup";
-import Loggedin from "./components/logged";
+import LoggedHome from "./components/loggedhome";
 import { setCurrentUser } from "./actions/authActions";
+import individualparty from "./components/individualparty";
 import store from "./store/store";
 import About from "./components/about";
+import Myparties from "./components/myparties";
 
 //Check for token everytime
 if (localStorage.jwtToken) {
@@ -32,7 +34,9 @@ class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/loggedin" component={Loggedin} />
+            <Route path="/home" component={LoggedHome} />
+            <Route path="/individualparty" component={individualparty} />
+            <Route path="/myparties" component={Myparties} />
             <Route component={Notfound} />
           </Switch>
         </div>
