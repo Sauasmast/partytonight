@@ -3,6 +3,7 @@ import { GET_PARTIES } from "./types";
 import { GET_ERRORS } from "./types";
 import { GET_INDIVIDUAL_PARTY } from "./types";
 import { USER_PARTY } from "./types";
+import { DELETE_PARTY } from "./types";
 
 export const party = () => dispatch => {
   axios
@@ -47,6 +48,41 @@ export const myparties = user_id => dispatch => {
       dispatch({
         type: USER_PARTY,
         payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const createparty = (data, history) => dispatch => {
+  axios
+    .post("/party/createparty", data)
+    .then(response => {
+      history.push("/myparties");
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const deleteparty = (party_id, history) => dispatch => {
+  const data = { party_id: party_id };
+  console.log({ data });
+  axios
+    .delete("/party/deleteparty", { data })
+    .then(response => {
+      dispatch({
+        type: DELETE_PARTY,
+        payload: party_id
       });
     })
     .catch(err => {

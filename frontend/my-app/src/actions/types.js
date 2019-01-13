@@ -3,3 +3,4 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const GET_PARTIES = "GET_PARTIES";
 export const GET_INDIVIDUAL_PARTY = "GET_INDIVIDUAL_PARTY";
 export const USER_PARTY = "GET_USER_PARTY";
+export const DELETE_PARTY = "DELETE_PARTY";

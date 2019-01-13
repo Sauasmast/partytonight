@@ -18,7 +18,7 @@ class Signup extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/loggedin");
+      this.props.history.push("/home");
     }
   }
 

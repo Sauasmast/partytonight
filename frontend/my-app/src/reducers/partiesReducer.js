@@ -1,6 +1,6 @@
 import { GET_PARTIES } from "../actions/types";
 import { GET_INDIVIDUAL_PARTY } from "../actions/types";
-import { USER_PARTY } from "../actions/types";
+import { USER_PARTY, DELETE_PARTY } from "../actions/types";
 
 const initstate = {};
 
@@ -21,7 +21,13 @@ export default function(state = initstate, action) {
         ...state,
         userparty: action.payload
       };
-
+    case DELETE_PARTY:
+      return {
+        ...state,
+        userparty: state.userparty.filter(
+          item => item.party_id !== action.payload
+        )
+      };
     default:
       return state;
   }

@@ -35,23 +35,26 @@ class LoggedHome extends Component {
       } else {
         this.eles = nextProps.parties.parties.map((item, key) => (
           <div
-            class="col-8 offset-2 card text-white bg-dark mb-3"
+            className="col-8 offset-2 card text-white bg-dark mb-3"
             key={item.party_id}
           >
-            <div class="card-header"> By user </div>
-            <div class="card-body">
-              <h5 class="card-title"> {item.invitation} </h5>
-              <div class="card-text">
-                <span class="white-text"> Location: {item.location} </span>
+            <div className="card-header"> By user </div>
+            <div className="card-body">
+              <h5 className="card-title"> {item.invitation} </h5>
+              <div className="card-text">
+                <span className="white-text"> Location: {item.location} </span>
                 <hr />
-                <span class="white-text"> Venue Name: {item.venue_name} </span>
+                <span className="white-text">
+                  {" "}
+                  Venue Name: {item.venue_name}{" "}
+                </span>
                 <hr />
-                <span class="white-text">
+                <span className="white-text">
                   People Limit: {item.people_limit}
                 </span>
                 <hr />
                 <button
-                  class="btn btn-xs btn-primary"
+                  className="btn btn-xs btn-primary"
                   onClick={() => this.individual(item.party_id)}
                 >
                   More Info
@@ -83,7 +86,7 @@ class LoggedHome extends Component {
       <header className="masthead">
         <div className="container d-flex h-100 align-items-center">
           <div className="mx-auto text-center">
-            <div class="row"> {this.eles} </div>
+            <div className="row"> {this.eles} </div>
           </div>
         </div>
       </header>

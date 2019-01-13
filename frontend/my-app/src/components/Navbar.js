@@ -44,9 +44,12 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link js-scroll-trigger text-white" href="#projects">
-            Parties
-          </a>
+          <Link
+            className="nav-link js-scroll-trigger text-white"
+            to="/organize"
+          >
+            Organize
+          </Link>
         </li>
         <li className="nav-item">
           <a

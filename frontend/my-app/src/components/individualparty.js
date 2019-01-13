@@ -29,7 +29,7 @@ class individualparty extends Component {
           <div> Venue Name: {data.venue_name} </div>
           <div> People Limit: {data.people_limit} </div>
           <div> Cost: {data.cost} </div>
-          {data.rsvp == 1 ? (
+          {data.rsvp === 1 ? (
             <button className="btn btn-primary btn-sm"> RSVP NOW</button>
           ) : (
             <p>
