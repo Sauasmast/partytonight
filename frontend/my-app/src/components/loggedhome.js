@@ -63,13 +63,6 @@ class LoggedHome extends Component {
             </div>
           </div>
         ));
-
-        // this.eles.push(
-        //   <h1>
-        //     There is a party of length {nextProps.parties.parties.length} on
-        //     list.
-        //   </h1>
-        // );
       }
     }
 
@@ -83,13 +76,9 @@ class LoggedHome extends Component {
 
   render() {
     return (
-      <header className="masthead">
-        <div className="container d-flex h-100 align-items-center">
-          <div className="mx-auto text-center">
-            <div className="row"> {this.eles} </div>
-          </div>
-        </div>
-      </header>
+      <div className="container">
+        <div className="row"> {this.eles} </div>
+      </div>
     );
   }
 }

@@ -31,18 +31,20 @@ class App extends Component {
       <BrowserRouter>
         <div id="page-top">
           <Navbar> </Navbar>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/home" component={LoggedHome} />
-            <Route path="/individualparty" component={individualparty} />
-            <Route path="/editparty" component={Editparty} />
-            <Route path="/organize" component={Organize} />
-            <Route path="/myparties" component={Myparties} />
-            <Route component={Notfound} />
-          </Switch>
+          <body className="masthead">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/home" component={LoggedHome} />
+              <Route path="/individualparty" component={individualparty} />
+              <Route path="/editparty" component={Editparty} />
+              <Route path="/organize" component={Organize} />
+              <Route path="/myparties" component={Myparties} />
+              <Route component={Notfound} />
+            </Switch>
+          </body>
         </div>
       </BrowserRouter>
     );
