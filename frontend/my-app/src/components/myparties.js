@@ -19,9 +19,10 @@ class Myparties extends Component {
   }
 
   onEditClick = item => {
-    console.log(item);
-    // More logic here by putting the pushing to a different location and
-    // passing the state with the state component
+    this.props.history.push({
+      pathname: "/editparty",
+      state: item
+    });
   };
 
   delete = party_id => {

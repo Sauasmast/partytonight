@@ -93,3 +93,21 @@ export const deleteparty = (party_id, history) => dispatch => {
       });
     });
 };
+
+export const edparty = (data, history) => dispatch => {
+  data.cost = parseInt(data.cost);
+  data.people_limit = parseInt(data.people_limit);
+  data.rsvp = parseInt(data.rsvp);
+  axios
+    .put("/party/editparty", data)
+    .then(response => {
+      history.push("/myparties");
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};

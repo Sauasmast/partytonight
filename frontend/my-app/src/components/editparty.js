@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createparty } from "../actions/parties";
+import { edparty } from "../actions/parties";
 import { withRouter } from "react-router-dom";
 
-class Organize extends Component {
-  constructor() {
-    super();
+class editparty extends Component {
+  constructor(props) {
+    super(props);
+    let data = this.props.location.state;
     this.state = {
-      invitation: "College Party",
-      location: "",
-      venue_name: "",
-      people_limit: "",
-      cost: 0,
-      additional_info: "",
-      rsvp: 0
+      party_id: data.party_id,
+      invitation: data.invitation,
+      location: data.location,
+      venue_name: data.venue_name,
+      people_limit: data.people_limit,
+      cost: data.cost,
+      additional_info: data.additional_info,
+      rsvp: data.rsvp
     };
-  }
-
-  componentDidMount() {
-    if (!this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
   }
 
   handleChange = e => {
@@ -31,12 +27,7 @@ class Organize extends Component {
 
   onSubmission = e => {
     e.preventDefault();
-    this.setState({
-      cost: parseInt(this.state.cost),
-      rsvp: parseInt(this.state.rsvp),
-      people_limit: parseInt(this.state.people_limit)
-    });
-    this.props.createparty(this.state, this.props.history);
+    this.props.edparty(this.state, this.props.history);
   };
 
   render() {
@@ -53,6 +44,7 @@ class Organize extends Component {
               id="invitation"
               name="invitation"
               onChange={this.handleChange}
+              defaultValue={this.state.invitation}
             >
               <option name="invitation" value="College Party">
                 College Party
@@ -120,8 +112,8 @@ class Organize extends Component {
               className="form-control"
               id="cost"
               name="cost"
-              value={this.state.cost}
               onChange={this.handleChange}
+              value={this.state.cost}
             />
           </div>
 
@@ -133,6 +125,7 @@ class Organize extends Component {
               value={1}
               onChange={this.handleChange}
               className="custom-control-input"
+              checked={parseInt(this.state.rsvp) === 1}
             />
             <label className="custom-control-label" htmlFor="rsvp">
               Need - RSVP
@@ -147,6 +140,7 @@ class Organize extends Component {
               value={0}
               className="custom-control-input"
               onChange={this.handleChange}
+              checked={parseInt(this.state.rsvp) === 0}
             />
             <label className="custom-control-label" htmlFor="rsvp2">
               No Need - RSVP
@@ -175,7 +169,7 @@ class Organize extends Component {
             onClick={this.onSubmission}
             className="btn btn-primary btn-xs"
           >
-            Submit
+            Edit Party
           </button>
         </form>
       </div>
@@ -183,11 +177,11 @@ class Organize extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapPropsToState = state => ({
   auth: state.auth
 });
 
 export default connect(
-  mapStateToProps,
-  { createparty }
-)(withRouter(Organize));
+  mapPropsToState,
+  { edparty }
+)(editparty);

@@ -15,6 +15,7 @@ import store from "./store/store";
 import About from "./components/about";
 import Myparties from "./components/myparties";
 import Organize from "./components/organize";
+import Editparty from "./components/editparty";
 
 //Check for token everytime
 if (localStorage.jwtToken) {
@@ -37,6 +38,7 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/home" component={LoggedHome} />
             <Route path="/individualparty" component={individualparty} />
+            <Route path="/editparty" component={Editparty} />
             <Route path="/organize" component={Organize} />
             <Route path="/myparties" component={Myparties} />
             <Route component={Notfound} />
