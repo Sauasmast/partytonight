@@ -1,22 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { edparty } from "../actions/parties";
+import { createparty } from "../actions/parties";
 import { withRouter } from "react-router-dom";
 
-class editparty extends Component {
-  constructor(props) {
-    super(props);
-    let data = this.props.location.state;
+class Organize extends Component {
+  constructor() {
+    super();
     this.state = {
-      party_id: data.party_id,
-      invitation: data.invitation,
-      location: data.location,
-      venue_name: data.venue_name,
-      people_limit: data.people_limit,
-      cost: data.cost,
-      additional_info: data.additional_info,
-      rsvp: data.rsvp
+      invitation: "College Party",
+      location: "",
+      venue_name: "",
+      people_limit: "",
+      cost: 0,
+      additional_info: "",
+      rsvp: 0
     };
+  }
+
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
   }
 
   handleChange = e => {
@@ -27,13 +31,18 @@ class editparty extends Component {
 
   onSubmission = e => {
     e.preventDefault();
-    this.props.edparty(this.state, this.props.history);
+    this.setState({
+      cost: parseInt(this.state.cost),
+      rsvp: parseInt(this.state.rsvp),
+      people_limit: parseInt(this.state.people_limit)
+    });
+    this.props.createparty(this.state, this.props.history);
   };
 
   render() {
     return (
       <div className="container">
-        <form onSubmit={this.onSubmission}>
+        <form onSubmit={this.onSubmission} className="text-white">
           <div>
             <h2> Please fill out the form below for the information </h2>
           </div>
@@ -44,7 +53,6 @@ class editparty extends Component {
               id="invitation"
               name="invitation"
               onChange={this.handleChange}
-              defaultValue={this.state.invitation}
             >
               <option name="invitation" value="College Party">
                 College Party
@@ -112,8 +120,8 @@ class editparty extends Component {
               className="form-control"
               id="cost"
               name="cost"
-              onChange={this.handleChange}
               value={this.state.cost}
+              onChange={this.handleChange}
             />
           </div>
 
@@ -125,7 +133,6 @@ class editparty extends Component {
               value={1}
               onChange={this.handleChange}
               className="custom-control-input"
-              checked={parseInt(this.state.rsvp) === 1}
             />
             <label className="custom-control-label" htmlFor="rsvp">
               Need - RSVP
@@ -140,14 +147,13 @@ class editparty extends Component {
               value={0}
               className="custom-control-input"
               onChange={this.handleChange}
-              checked={parseInt(this.state.rsvp) === 0}
             />
             <label className="custom-control-label" htmlFor="rsvp2">
               No Need - RSVP
             </label>
           </div>
 
-          <small id="rsvp2" className="form-text text-muted">
+          <small id="rsvp2" className="form-text text-white">
             If nothing is selected then rspv will not be required.
           </small>
 
@@ -169,7 +175,7 @@ class editparty extends Component {
             onClick={this.onSubmission}
             className="btn btn-primary btn-xs"
           >
-            Edit Party
+            Submit
           </button>
         </form>
       </div>
@@ -177,11 +183,11 @@ class editparty extends Component {
   }
 }
 
-const mapPropsToState = state => ({
+const mapStateToProps = state => ({
   auth: state.auth
 });
 
 export default connect(
-  mapPropsToState,
-  { edparty }
-)(editparty);
+  mapStateToProps,
+  { createparty }
+)(withRouter(Organize));

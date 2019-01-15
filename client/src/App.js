@@ -31,7 +31,7 @@ class App extends Component {
       <BrowserRouter>
         <div id="page-top">
           <Navbar> </Navbar>
-          <body className="masthead">
+          <div className="masthead">
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
@@ -44,7 +44,7 @@ class App extends Component {
               <Route path="/myparties" component={Myparties} />
               <Route component={Notfound} />
             </Switch>
-          </body>
+          </div>
         </div>
       </BrowserRouter>
     );

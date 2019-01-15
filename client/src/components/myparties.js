@@ -76,8 +76,10 @@ class Myparties extends Component {
       } else {
         this.ele = (
           <div>
-            <h2> You have no party invitation right now. </h2>
-            <h2>
+            <h2 className="text-white">
+              You have no party invitation right now.
+            </h2>
+            <h2 className="text-white">
               To create a party. <Link to="/organize"> Click here </Link>
             </h2>
           </div>

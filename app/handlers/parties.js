@@ -1,5 +1,15 @@
 const party = require("../modules/parties");
 
+module.exports.getallparty = async (req, res) => {
+  // validate party here
+  try {
+    let all_party = await party.allparty(req.payload.user_id);
+    res.status(200).send(all_party);
+  } catch (e) {
+    res.status(e.code).send({ errors: e });
+  }
+};
+
 module.exports.createparty = async (req, res) => {
   // validate party here
   try {
@@ -30,6 +40,7 @@ module.exports.editparty = async (req, res) => {
 
 module.exports.deleteparty = async (req, res) => {
   data = req.body;
+  console.log(req.body);
   //validate the incoming data party
   try {
     let party_data = await party.partyexist(data.party_id);
@@ -40,15 +51,27 @@ module.exports.deleteparty = async (req, res) => {
     let delete_party = await party.deleteparty(party_data[0].party_id);
     res.status(200).send({ message: "Sucessfully deleted the record" });
   } catch (e) {
+    console.log(e);
     res.status(e.code).send({ errors: e });
   }
 };
 
 module.exports.get_info_party = async (req, res) => {
   try {
+    console.log(req.params.party_id);
     let party_data = await party.partyexist(req.params.party_id);
     res.status(200).send(party_data);
   } catch (e) {
     res.status(e.code).send({ errors: e });
+  }
+};
+
+module.exports.get_user_party = async (req, res) => {
+  user = req.payload.user_id;
+  try {
+    let get_user_party = await party.get_user_party(user);
+    res.status(200).send(get_user_party);
+  } catch (e) {
+    res.status(500).send(e);
   }
 };

@@ -8,6 +8,11 @@ const router = express.Router();
 //@route POST /party/createparty
 //@desc create a new party
 //@access private
+router.get("/getparty", parties.getallparty);
+
+//@route POST /party/createparty
+//@desc create a new party
+//@access private
 router.post("/createparty", parties.createparty);
 
 //@route put /party/editparty
@@ -24,5 +29,10 @@ router.delete("/deleteparty", parties.deleteparty);
 //@desc delete a specific party record
 //@access private
 router.get("/getparty/:party_id", parties.get_info_party);
+
+//@route POST /party/deleteparty
+//@desc delete a specific party record
+//@access private
+router.get("/getuserparty", parties.get_user_party);
 
 module.exports = router;

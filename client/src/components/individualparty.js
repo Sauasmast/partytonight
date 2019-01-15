@@ -33,7 +33,7 @@ class individualparty extends Component {
             <button className="btn btn-primary btn-sm"> RSVP NOW</button>
           ) : (
             <p>
-              There is not need to RSVP. Just show up at the party and have fun.{" "}
+              There is not need to RSVP. Just show up at the party and have fun.
             </p>
           )}
           <div> Additional Info: {data.additional_info} </div>
@@ -50,7 +50,7 @@ class individualparty extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container text-white">
         <h2> Party invitation </h2>
         <div>{this.ele}</div>
       </div>
