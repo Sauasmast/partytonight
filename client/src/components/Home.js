@@ -14,10 +14,14 @@ class Home extends Component {
       <div className="container d-flex h-100 align-items-center">
         <div className="mx-auto text-center">
           <h1 className="mx-auto my-0 text-uppercase"> Party With Us </h1>
-          <h2 className="text-white mx-auto mt-2 mb-4">
+          <h2 className="text-white mx-auto mt-2">
             Get notifications for the party and festival dinners from unknown
             person. Life is Beautiful.... Live it.
           </h2>
+          <small class="form-text text-white mb-4">
+            New Features and Updates will be added day by day (Under
+            construction)
+          </small>
           <Link
             to="/login"
             className="btn btn-primary btn-sm js-scroll-trigger"
